@@ -6,7 +6,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports =  {  
-        mode: 'production',
+        mode: 'development',
         entry: __dirname + '/src/js/script.js',
         output: {
             path: __dirname + '/dist', 
@@ -16,7 +16,7 @@ module.exports =  {
         optimization: {
             minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
         },
-        module: {  
+        /* module: {  
             rules: [
                 {
                     test: /\.js/,
@@ -34,16 +34,16 @@ module.exports =  {
                     use: [MiniCssExtractPlugin.loader, 'css-loader'],
                 }
             ]
-        },
+        }, */
         plugins: [
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
             new HtmlWebpackPlugin({
-                template: __dirname + '/src/public/index.html'
+                template: __dirname + '/src/index.html'
             }),
             new CopyWebpackPlugin( {
                 patterns: [
-                { from: __dirname + '/src/public/images', to: 'images' },
+                { from: __dirname + '/src/images', to: 'images' },
                 { from: __dirname + '/src/styles', to: 'styles' }
                 ]
             })      

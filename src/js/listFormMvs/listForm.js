@@ -6,12 +6,13 @@ export default class ListForm {
     getTasks() {    
         fetch('/tasks')
         .then(infoTasks => infoTasks.json())
-        .then(infoTasks => this.view.showTaskList(infoTasks))
+        .then(infoTasks => { console.log(infoTasks)
+            this.view.showTaskList(infoTasks)})
         .catch(err => console.error(`Connection Error:${err}`));
     }
 
     deleteTask(currentTask) {
-        fetch(`/tasks/${currentTask.id}`, {
+        return fetch(`/tasks/${currentTask.id}`, {
                 method: 'DELETE'
             })
         .then(response => response)

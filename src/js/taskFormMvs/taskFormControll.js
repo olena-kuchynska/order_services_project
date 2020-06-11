@@ -63,13 +63,22 @@ export default class TaskFormControll {
                 location:  taskInfo.location
             }
             let action;
-            if(event.target.innerText.toLowerCase() === 'create task') {                
-                action = this.model.addTask(task);                
+            if(event.target.innerText.toLowerCase() === 'create task') {
+                action = this.model.addTask(task);                      
             } else if(event.target.innerText.toLowerCase() === 'edit task') {
-                
-                action = this.model.editTask(task);               
+                action = this.model.editTask(task);                             
             }
-            Promise.all([action,this.subscribers.publish('showEvent')]);            
+
+            let actionForTask = async () => {
+                try {
+                    await action;
+                  } catch (err) {
+                    console.error(err);
+                  }
+                  this.subscribers.publish('showEvent');
+            };
+            actionForTask();
+            
             this.view.actionCancel();
         });
     }

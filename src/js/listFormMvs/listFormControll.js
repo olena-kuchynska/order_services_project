@@ -22,19 +22,22 @@ export default class ListFormControll {
             let currentElement = events.target;
             let currentTask = currentElement.parentElement;
             if(currentElement.className === 'delete-button') {
-                Promise.all([
-                this.model.deleteTask(currentTask),
-                this.handleGetTasks(),
-                ]);
+                let actionDelete = async () => {
+                    try {
+                        await this.model.deleteTask(currentTask);;
+                      } catch (err) {
+                        console.error(err);
+                      }
+                      this.model.getTasks();
+                };
+                                
+                actionDelete();               
+
             } else if(currentElement.className === 'edit-button') {
-                this.subscribers.publish('editEvent', currentTask);                
-            }            
+                this.subscribers.publish('editEvent', currentTask);
+            }        
         });    
         
-        /* window.addEventListener('resize', () => {
-            this.view.resizeWindow();
-        }); */
-
         const newTaskButton =  document.body.querySelector('.new-task');
         newTaskButton.addEventListener('click', () => this.subscribers.publish('addEvent')); 
     }    

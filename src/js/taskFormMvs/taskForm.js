@@ -39,7 +39,7 @@ export default class TaskForm {
 
     addTask(task) {
         if(task.typeOfService && task.location) {         
-            fetch('/tasks', {
+            return fetch('/tasks', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -54,7 +54,7 @@ export default class TaskForm {
     }
 
     editTask(task) { 
-        fetch(`/tasks/${this.currentTask}`, {
+        return fetch(`/tasks/${this.currentTask}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'

@@ -38,7 +38,7 @@ export default class ListTasksView {
                 let date = new Date(item.dateCreating); 
                 let hours =  date.getHours() < 10 ? `0${date.getHours()}`: date.getHours();
                 let minutes =  date.getMinutes() < 10 ? `0${date.getMinutes()}`: date.getMinutes();
-                let dateStr = `${dayOfWeek[date.getDay()]}, ${month[date.getMonth()]} ${date.getDate()}, ${hours}:${minutes}`;            
+                let dateStr = `${dayOfWeek[date.getDay() - 1]}, ${month[date.getMonth()]} ${date.getDate()}, ${hours}:${minutes}`;            
                 dateCreating.innerText = dateStr;
                 task.append(dateCreating);
 
@@ -60,16 +60,4 @@ export default class ListTasksView {
 
     }
 
-    /* resizeWindow() {
-        const listTask = document.body.querySelector('.tasks-list');
-
-        let element = document.body.querySelector('.new-task');
-        let marginTop = parseInt(getComputedStyle(element, true).marginTop);
-        let marginBottom = parseInt(getComputedStyle(element, true).marginBottom);
-
-        listTask.style.maxHeight = `calc(
-                ${document.documentElement.clientHeight}px - 
-                ${element.offsetHeight + marginTop + marginBottom}px
-            )`;
-    }    */  
 }
